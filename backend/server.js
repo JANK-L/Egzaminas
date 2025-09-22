@@ -23,12 +23,12 @@ mongoose
   .catch((err) => console.log(err));
 
 //Middleware
-app.use(express.json());
-app.use((req, res, next) => {
+server.use(express.json());
+server.use((req, res, next) => {
   console.log("Method: ", req.method);
   console.log("Path: ", req.path);
   console.log("-----");
   next();
 });
 
-app.use("/api/auth", userRoutes);
+server.use("/api/auth", userRoutes);
