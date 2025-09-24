@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import cors from "cors";
 
 import userRoutes from "./routes/userRoutes.js";
 
@@ -24,6 +25,7 @@ mongoose
 
 //Middleware
 server.use(express.json());
+server.use(cors({ origin: "http://localhost:3001", credentials: true }));
 server.use((req, res, next) => {
   console.log("Method: ", req.method);
   console.log("Path: ", req.path);

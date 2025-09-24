@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import useAuthPortal from "../hooks/usePortal";
 
 const LoginSignup = () => {
@@ -15,8 +13,6 @@ const LoginSignup = () => {
     error,
     handleSubmit,
   } = useAuthPortal();
-
-  const location = useLocation();
 
   return (
     <div className="LoginPortal">
@@ -49,6 +45,9 @@ const LoginSignup = () => {
           value={password}
           required
         />
+
+        {error !== "" && <div className="Error">{error}</div>}
+
         <button disabled={loading}>{portalState}</button>
       </form>
     </div>
