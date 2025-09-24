@@ -1,7 +1,15 @@
 import { Link, useLocation } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
+import { useLogout } from "../hooks/useLogout";
 
 const Navbar = () => {
   const location = useLocation();
+  const { user } = useAuthContext();
+  const { logout } = useLogout();
+
+  const handleLogout = (e) => {
+    logout();
+  };
 
   return (
     <header>
@@ -11,11 +19,18 @@ const Navbar = () => {
           <h1>
             <Link to="/">Rent A Something</Link>
           </h1>
-          <button className="login">
-            <Link to={location.pathname === "/Login" ? "Signup" : "Login"}>
-              Login/Signup
-            </Link>
-          </button>
+          {user ? (
+            <div className="Logout">
+              <h2>Hello, {user.username}</h2>
+              <button onClick={handleLogout}>Logout</button>
+            </div>
+          ) : (
+            <button className="login">
+              <Link to={location.pathname === "/Login" ? "Signup" : "Login"}>
+                Login/Signup
+              </Link>
+            </button>
+          )}
         </nav>
       </div>
     </header>

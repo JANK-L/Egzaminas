@@ -5,7 +5,7 @@ export const useLogout = () => {
 
   const logout = () => {
     localStorage.removeItem("user");
-    dispatch({ tpye: "LOGOUT" });
+    dispatch({ type: "LOGOUT" });
   };
 
   return { logout };

@@ -97,3 +97,8 @@ html {
   margin: 0;
   align-self: center;
 }
+.Logout {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}

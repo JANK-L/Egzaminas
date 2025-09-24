@@ -1,4 +1,7 @@
+import { useEffect } from "react";
 import useAuthPortal from "../hooks/usePortal";
+import { useAuthContext } from "../hooks/useAuthContext";
+import { useNavigate } from "react-router-dom";
 
 const LoginSignup = () => {
   const {
@@ -13,6 +16,15 @@ const LoginSignup = () => {
     error,
     handleSubmit,
   } = useAuthPortal();
+
+  const { user } = useAuthContext();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
 
   return (
     <div className="LoginPortal">
