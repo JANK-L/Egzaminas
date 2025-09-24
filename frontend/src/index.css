@@ -51,3 +51,31 @@ html {
   font-size: large;
   cursor: pointer;
 }
+
+.LoginPortal form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+
+  border: 3px solid black;
+  border-radius: 15px;
+  padding: 30px 10px;
+  margin: 20px auto;
+  gap: 10px;
+  font-weight: bold;
+}
+
+.LoginPortal button {
+  background-color: #88ab75;
+  padding: 10px;
+  border-radius: 15px;
+  border: none;
+  font-size: large;
+  cursor: pointer;
+}
+.LoginPortal button:disabled {
+  background-color: #d1f1c0;
+  color: #666;
+  cursor: initial;
+  opacity: 0.6;
+}

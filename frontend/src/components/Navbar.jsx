@@ -1,6 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
+  const location = useLocation();
+
   return (
     <header>
       <div className="Navbar">
@@ -10,7 +12,9 @@ const Navbar = () => {
             <Link to="/">Rent A Something</Link>
           </h1>
           <button className="login">
-            <Link to="Login">Login/Signup</Link>
+            <Link to={location.pathname === "/Login" ? "Signup" : "Login"}>
+              Login/Signup
+            </Link>
           </button>
         </nav>
       </div>
