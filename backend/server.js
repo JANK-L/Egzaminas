@@ -17,7 +17,7 @@ mongoose
       console.log("-----");
       console.log("Connected to DB.");
       console.log(`Listening on port ${process.env.PORT}.`);
-      console.log(`Hosting: https://localhost:${process.env.PORT}`);
+      console.log(`Hosting: http://localhost:${process.env.PORT}`);
       console.log("-----");
     });
   })
@@ -29,8 +29,12 @@ server.use(cors({ origin: "http://localhost:3001", credentials: true }));
 server.use((req, res, next) => {
   console.log("Method: ", req.method);
   console.log("Path: ", req.path);
+  console.log("Body: ", req.body);
   console.log("-----");
   next();
 });
 
 server.use("/api/auth", userRoutes);
+server.use((req, res) => {
+  res.status(404).json({ message: "Not Found" });
+});
