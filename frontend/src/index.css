@@ -63,6 +63,8 @@ html {
   margin: 20px auto;
   gap: 10px;
   font-weight: bold;
+
+  background-color: #e4d8d3;
 }
 
 .LoginPortal button {
@@ -78,4 +80,9 @@ html {
   color: #666;
   cursor: initial;
   opacity: 0.6;
+}
+
+.LoginPortal input {
+  background-color: #ebeaec;
+  border: solid black 1px;
 }
