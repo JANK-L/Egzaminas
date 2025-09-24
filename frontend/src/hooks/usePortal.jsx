@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useAuthContext } from "./useAuthContext";
 
 const useAuthPortal = () => {
   const location = useLocation();
+  const { dispatch } = useAuthContext();
 
   const [portalState, setPortalState] = useState("LOGIN");
   const [email, setEmail] = useState("");
@@ -20,21 +22,64 @@ const useAuthPortal = () => {
     }
   }, [location.pathname]);
 
+  const signup = async (username, email, password) => {
+    const response = await fetch("http://localhost:4000/api/auth/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, email, password }),
+      credentials: "include",
+    });
+
+    const json = await response.json();
+
+    if (!response.ok) {
+      setLoading(false);
+      setError(json.error);
+    }
+
+    if (response.ok) {
+      localStorage.setItem("user", JSON.stringify(json));
+      dispatch({ type: "LOGIN", payload: json });
+      setLoading(false);
+    }
+  };
+
+  const login = async (username, password) => {
+    const response = await fetch("http://localhost:4000/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),
+      credentials: "include",
+    });
+
+    const json = await response.json();
+
+    if (!response.ok) {
+      setLoading(false);
+      setError(json.error);
+      console.log(json.error);
+    }
+
+    if (response.ok) {
+      localStorage.setItem("user", JSON.stringify(json));
+      dispatch({ type: "LOGIN", payload: json });
+      setLoading(false);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError("");
+    setError(null);
 
     try {
       if (portalState === "LOGIN") {
-        console.log("Logging in:", { username, password });
+        await login(username, password);
       } else {
-        console.log("Signing up:", { username, email, password });
+        await signup(username, email, password);
       }
     } catch (err) {
       setError("Something went wrong.");
-    } finally {
-      setLoading(false);
     }
   };
 
