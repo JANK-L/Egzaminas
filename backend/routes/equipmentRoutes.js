@@ -9,8 +9,8 @@ const router = express.Router();
 
 router.post("/add", postItem);
 
-router.get("/list/:id", getList);
+router.get("/list/:id", getOneItem);
 
-router.get("/list", getOneItem);
+router.get("/list", getList);
 
 export default router;

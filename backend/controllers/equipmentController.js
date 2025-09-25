@@ -1,11 +1,25 @@
 import Equipment from "../models/equipmentModel.js";
 
 export const getList = async (req, res) => {
-  res.status(200).json({ msg: "eqp list" });
+  try {
+    const list = await Equipment.find({ "units.state": "available" });
+    if (list) res.status(200).json({ list });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "error" });
+  }
 };
 
 export const getOneItem = async (req, res) => {
-  res.status(200).json({ msg: "eqp one item" });
+  const { id } = req.params;
+
+  try {
+    const item = await Equipment.findById(id);
+    if (item) res.status(200).json({ item });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "error" });
+  }
 };
 
 export const postItem = async (req, res) => {
