@@ -8,7 +8,8 @@ const Home = () => {
   const [list, setList] = useState([]);
   const location = useLocation().pathname;
   const url =
-    "http://localhost:4000/api/equipment/list" +
+    API_URL +
+    "/api/equipment/list" +
     (location === "/Equipment/edit" ? "/all" : "");
 
   useEffect(() => {

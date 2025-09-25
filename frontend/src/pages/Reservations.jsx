@@ -9,16 +9,13 @@ const Reservations = () => {
   useEffect(() => {
     const fetchList = async () => {
       try {
-        const response = await fetch(
-          "http://localhost:4000/api/reservation/list",
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${user.token}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const response = await fetch(API_URL + "/api/reservation/list", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+            "Content-Type": "application/json",
+          },
+        });
 
         const json = await response.json();
 

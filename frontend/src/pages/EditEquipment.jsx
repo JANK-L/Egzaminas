@@ -24,18 +24,15 @@ const EditEquipment = () => {
       _id: id,
     };
     console.log(equipmentData);
-    const response = await fetch(
-      "http://localhost:4000/api/equipment/update/",
-      {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(equipmentData),
-        credentials: "include",
-      }
-    );
+    const response = await fetch(API_URL + "/api/equipment/update/", {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(equipmentData),
+      credentials: "include",
+    });
 
     const json = await response.json();
 
@@ -51,16 +48,13 @@ const EditEquipment = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(
-          "http://localhost:4000/api/equipment/list/" + id,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            credentials: "include", // move this outside headers
-          }
-        );
+        const response = await fetch(API_URL + "/api/equipment/list/" + id, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include", // move this outside headers
+        });
 
         const json = await response.json();
 
