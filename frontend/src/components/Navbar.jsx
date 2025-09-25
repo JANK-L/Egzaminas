@@ -41,7 +41,9 @@ const Navbar = () => {
       </div>
       <div className="sideNav" style={{ display: visible ? "flex" : "none" }}>
         <Link to={"/"}>Product List</Link>
-        {user?.role === "user" && <Link to={"/"}>My reservations</Link>}
+        {user?.role === "user" && (
+          <Link to={"/Reservation/user"}>My reservations</Link>
+        )}
         {user?.role === "admin" && (
           <>
             <Link to={"/Equipment/add"}>Add Product</Link>

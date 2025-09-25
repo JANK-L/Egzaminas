@@ -8,6 +8,7 @@ import AddEquipment from "./pages/AddEquipment";
 import Product from "./pages/Product";
 import Reservations from "./pages/Reservations";
 import EditEquipment from "./pages/EditEquipment";
+import UserReservations from "./pages/userReservations";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/Reservation" element={<Reservations />} />
+            <Route path="/Reservation/user" element={<UserReservations />} />
             <Route path="/Reservation/:id" element={<Product />} />
             <Route path="/Login" element={<LoginSignup />} />
             <Route path="/Signup" element={<LoginSignup />} />
