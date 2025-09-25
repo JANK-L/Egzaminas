@@ -32,7 +32,11 @@ mongoose
 server.use(express.json());
 server.use(
   cors({
-    origin: ["http://localhost:3001", "https://egzaminas-mu.vercel.app/"],
+    origin: [
+      "http://localhost:3001",
+      "https://egzaminas-mu.vercel.app",
+      "https://egzaminas-3uda8qt40-jank-ls-projects.vercel.app",
+    ],
     credentials: true,
   })
 );
