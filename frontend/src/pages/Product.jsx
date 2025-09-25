@@ -49,8 +49,11 @@ const Product = () => {
 
   return (
     <div className="Product">
-      <h3>Title {product.title}</h3>
-      <p>Description {product.description}</p>
+      <h3>{product.title}</h3>
+      <p>
+        Description: <br />
+        {product.description}
+      </p>
       <p>Price: {product.price} &euro;/day</p>
       <p>
         Available units:{" "}
@@ -67,7 +70,7 @@ const Product = () => {
           />
           {startDate && endDate ? (
             <p>
-              Total price:{getTotalDays(startDate, endDate) * product.price}{" "}
+              Total price: {getTotalDays(startDate, endDate) * product.price}{" "}
               &euro;
             </p>
           ) : (
