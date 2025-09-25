@@ -16,9 +16,9 @@ const Navbar = () => {
       <div className="Navbar">
         <button>&#9776;</button>
         <nav>
-          <h1>
+          <h2>
             <Link to="/">Rent A Something</Link>
-          </h1>
+          </h2>
           {user ? (
             <div className="Logout">
               <h2>Hello, {user.username}</h2>

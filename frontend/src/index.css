@@ -52,7 +52,7 @@ html {
   cursor: pointer;
 }
 
-.LoginPortal form {
+form {
   display: flex;
   flex-direction: column;
   max-width: 400px;
@@ -67,7 +67,7 @@ html {
   background-color: #e4d8d3;
 }
 
-.LoginPortal button {
+button {
   background-color: #88ab75;
   padding: 10px;
   border-radius: 15px;
@@ -75,14 +75,15 @@ html {
   font-size: large;
   cursor: pointer;
 }
-.LoginPortal button:disabled {
+form button:disabled {
   background-color: #d1f1c0;
   color: #666;
   cursor: initial;
   opacity: 0.6;
 }
 
-.LoginPortal input {
+form input,
+textarea {
   background-color: #ebeaec;
   border: solid black 1px;
 }
@@ -97,8 +98,64 @@ html {
   margin: 0;
   align-self: center;
 }
+
 .Logout {
   display: flex;
   align-items: center;
   gap: 20px;
+}
+
+.item-card {
+  border: 3px solid black;
+  border-radius: 15px;
+  padding: 10px 10px;
+  margin: 10px;
+  gap: 10px;
+  font-weight: bold;
+  color: black;
+
+  background-color: #e4d8d3;
+}
+.item-card:hover {
+  background-color: #d8b9ac;
+}
+
+.item-list {
+  width: 90%;
+  margin: 15px auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Product {
+  display: flex;
+  flex-direction: column;
+  border: solid 2px black;
+  margin: auto;
+  max-width: 600px;
+  margin-top: 20px;
+  padding: 15px;
+
+  font-weight: bold;
+  color: black;
+
+  gap: 10px;
+  background-color: #e4d8d3;
+}
+
+.Product p {
+  background-color: #ffffff;
+  padding: 5px;
+  border-radius: 5px;
+}
+.Product .needLogin {
+  background-color: #de8f6e;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+}
+.dateSelector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
