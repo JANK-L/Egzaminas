@@ -1,11 +1,19 @@
-//import { useAuthContext } from "../hooks/useAuthContext";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Items = ({ item }) => {
+  const location = useLocation();
+  const link =
+    location.pathname && location.pathname !== "/"
+      ? location.pathname + "/"
+      : "/Equipment/";
+
   return (
-    <Link to={"equipment/" + item._id}>
+    <Link to={link + item._id}>
       <div className="item-card">
-        <h3>{item.title}</h3>
+        <h3>
+          {item.title} <br />
+          {(link, item._id)}
+        </h3>
         <p>Price: {item.price} &euro;/day</p>
         <p>
           Available units:{" "}

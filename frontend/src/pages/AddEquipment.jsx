@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const AddEquipment = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
   const [units, setUnits] = useState(0);
+
+  const { user } = useAuthContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,10 +22,12 @@ const AddEquipment = () => {
       price: price,
       units: unitArray,
     };
-    console.log(equipmentData);
     const response = await fetch("http://localhost:4000/api/equipment/add", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(equipmentData),
       credentials: "include",
     });
