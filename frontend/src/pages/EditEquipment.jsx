@@ -6,7 +6,7 @@ const EditEquipment = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
-  const [units, setUnits] = useState(0);
+  const [state, setState] = useState("draft");
 
   const id = useLocation().pathname.split("/")[3];
 
@@ -16,15 +16,11 @@ const EditEquipment = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const unitArray = Array.from({ length: units }, () => ({
-      state: "available",
-    }));
-
     const equipmentData = {
       title,
       description,
       price: price,
-      units: unitArray,
+      state,
       _id: id,
     };
     console.log(equipmentData);
@@ -75,7 +71,7 @@ const EditEquipment = () => {
         setTitle(json.item.title);
         setDescription(json.item.description);
         setPrice(json.item.price);
-        setUnits(json.item.units.length);
+        setState(json.item.state);
       } catch (err) {
         console.log(err.message);
       }
@@ -110,13 +106,15 @@ const EditEquipment = () => {
           required
         />
 
-        <label>UNITS</label>
-        <input
-          type="Number"
-          onChange={(e) => setUnits(e.target.value)}
-          value={units}
+        <label>STATE</label>
+        <select
+          value={state}
+          onChange={(e) => setState(e.target.value)}
           required
-        />
+        >
+          <option value="available">Available</option>
+          <option value="draft">Draft</option>
+        </select>
 
         <button>SUBMIT CHANGES</button>
       </form>

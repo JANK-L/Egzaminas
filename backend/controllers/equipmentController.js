@@ -2,7 +2,16 @@ import Equipment from "../models/equipmentModel.js";
 
 export const getList = async (req, res) => {
   try {
-    const list = await Equipment.find({ "units.state": "available" });
+    const list = await Equipment.find({ state: "available" });
+    if (list) res.status(200).json({ list });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "error" });
+  }
+};
+export const getListAll = async (req, res) => {
+  try {
+    const list = await Equipment.find();
     if (list) res.status(200).json({ list });
   } catch (error) {
     console.log(error);
@@ -23,16 +32,15 @@ export const getOneItem = async (req, res) => {
 };
 
 export const postItem = async (req, res) => {
-  const { title, price, units, description } = req.body;
+  const { title, price, description } = req.body;
   try {
-    if (!title || !price || !units || !description) {
+    if (!title || !price || !description) {
       return res.status(400).json({ message: "Invalid input data" });
     }
 
     const equipment = await Equipment.create({
       title,
       price,
-      units,
       description,
     });
     res.status(201).json(equipment);
@@ -43,9 +51,9 @@ export const postItem = async (req, res) => {
 };
 
 export const updateItem = async (req, res) => {
-  const { title, price, units, description, _id } = req.body;
+  const { title, price, description, _id, state } = req.body;
   try {
-    if (!title || !price || !units || !description) {
+    if (!title || !price || !description || !state) {
       return res.status(400).json({ message: "Invalid input data" });
     }
 
@@ -54,8 +62,8 @@ export const updateItem = async (req, res) => {
       {
         title,
         price,
-        units,
         description,
+        state,
       },
       { new: true } // Return the updated document
     );

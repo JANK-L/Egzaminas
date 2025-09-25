@@ -1,6 +1,7 @@
 import express from "express";
 import {
   getList,
+  getListAll,
   getOneItem,
   postItem,
   updateItem,
@@ -12,6 +13,7 @@ const router = express.Router();
 router.post("/add", verifyToken, isAdmin, postItem);
 router.put("/update", verifyToken, isAdmin, updateItem);
 
+router.get("/list/all", verifyToken, isAdmin, getListAll);
 router.get("/list/:id", getOneItem);
 
 router.get("/list", getList);
