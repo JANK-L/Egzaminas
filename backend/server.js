@@ -33,7 +33,7 @@ server.use(express.json());
 server.use(
   cors({
     origin: [
-      "http://localhost:3001",
+      "https://egzaminas-neceveiw2-jank-ls-projects.vercel.app/",
       "https://egzaminas-mu.vercel.app",
       "https://egzaminas-3uda8qt40-jank-ls-projects.vercel.app",
     ],
