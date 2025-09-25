@@ -1,7 +1,7 @@
 # Egzaminas
 Egzamino Git
 
-vercel link: https://egzaminas-3uda8qt40-jank-ls-projects.vercel.app/
+vercel link: egzaminas-mu.vercel.app
 
 admin login:
 admin
