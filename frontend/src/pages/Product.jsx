@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import DateSelector from "../components/DateSelector";
 import { useAuthContext } from "../hooks/useAuthContext";
+import API_URL from "../config";
 
 const Product = () => {
   const { user } = useAuthContext();
@@ -14,15 +15,12 @@ const Product = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(
-          "http://localhost:4000/api/equipment/list/" + id,
-          {
-            headers: {
-              Authorization: `Bearer ${user?.token}`,
-              credentials: "include",
-            },
-          }
-        );
+        const response = await fetch(API_URL + "/api/equipment/list/" + id, {
+          headers: {
+            Authorization: `Bearer ${user?.token}`,
+            credentials: "include",
+          },
+        });
 
         const json = await response.json();
 
@@ -51,23 +49,20 @@ const Product = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch(
-      "http://localhost:4000/api/reservation/add/" + id,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          equipment_id: id,
-          timeFrom: startDate,
-          timeTo: endDate,
-          price: getTotalDays(startDate, endDate) * product.price,
-        }),
-        credentials: "include",
-      }
-    );
+    const response = await fetch(API_URL + "/api/reservation/add/" + id, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        equipment_id: id,
+        timeFrom: startDate,
+        timeTo: endDate,
+        price: getTotalDays(startDate, endDate) * product.price,
+      }),
+      credentials: "include",
+    });
 
     const json = await response.json();
 

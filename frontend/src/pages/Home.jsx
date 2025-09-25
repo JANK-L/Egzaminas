@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import Items from "../components/item";
 import { useLocation } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
+import API_URL from "../config";
 
 const Home = () => {
   const { user } = useAuthContext();
   const [list, setList] = useState([]);
   const location = useLocation().pathname;
   const url =
-    "http://localhost:4000/api/equipment/list" +
+    API_URL +
+    "/api/equipment/list" +
     (location === "/Equipment/edit" ? "/all" : "");
 
   useEffect(() => {

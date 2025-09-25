@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useAuthContext } from "./useAuthContext";
+import API_URL from "../config";
 
 const useAuthPortal = () => {
   const location = useLocation();
@@ -23,7 +24,7 @@ const useAuthPortal = () => {
   }, [location.pathname]);
 
   const signup = async (username, email, password) => {
-    const response = await fetch("http://localhost:4000/api/auth/signup", {
+    const response = await fetch(API_URL + "/api/auth/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, email, password }),
