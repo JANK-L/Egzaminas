@@ -12,6 +12,18 @@ export const getList = async (req, res) => {
   }
 };
 
+export const getUserList = async (req, res) => {
+  const authHeader = req.headers.authorization;
+  const decoded = jwt.verify(authHeader.split(" ")[1], process.env.SECRET);
+  try {
+    const list = await Reservation.find({ user_id: decoded._id });
+    if (list) res.status(200).json({ list });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "error" });
+  }
+};
+
 export const getOneItem = async (req, res) => {
   const { id } = req.params;
 
