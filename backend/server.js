@@ -30,7 +30,12 @@ mongoose
 
 //Middleware
 server.use(express.json());
-server.use(cors({ origin: "http://localhost:3001", credentials: true }));
+server.use(
+  cors({
+    origin: ["http://localhost:3001", "https://egzaminas-mu.vercel.app/"],
+    credentials: true,
+  })
+);
 server.use((req, res, next) => {
   console.log("Method: ", req.method);
   console.log("Path: ", req.path);
