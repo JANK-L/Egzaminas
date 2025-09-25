@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
+import API_URL from "../config";
 
 const EditEquipment = () => {
   const [title, setTitle] = useState("");

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Items from "../components/item";
 import { useAuthContext } from "../hooks/useAuthContext";
+import API_URL from "../config";
 
 const Reservations = () => {
   const [list, setList] = useState([]);

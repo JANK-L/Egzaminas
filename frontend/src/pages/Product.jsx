@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import DateSelector from "../components/DateSelector";
 import { useAuthContext } from "../hooks/useAuthContext";
+import API_URL from "../config";
 
 const Product = () => {
   const { user } = useAuthContext();

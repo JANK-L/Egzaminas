@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Items from "../components/item";
 import { useLocation } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
+import API_URL from "../config";
 
 const Home = () => {
   const { user } = useAuthContext();
