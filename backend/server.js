@@ -40,7 +40,7 @@ server.use(
     credentials: true,
   })
 );
-server.options("*", cors());
+
 server.use((req, res, next) => {
   console.log("Method: ", req.method);
   console.log("Path: ", req.path);
