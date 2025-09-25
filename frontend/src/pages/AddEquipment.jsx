@@ -1,0 +1,73 @@
+import { useState } from "react";
+
+const AddEquipment = () => {
+  const [title, setTitle] = useState("");
+  const [price, setPrice] = useState(0);
+  const [units, setUnits] = useState(0);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const unitArray = Array.from({ length: units }, () => ({
+      state: "available",
+    }));
+
+    const equipmentData = {
+      title,
+      price: price,
+      units: unitArray,
+    };
+    console.log(equipmentData);
+    const response = await fetch("http://localhost:4000/api/equipment/add", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(equipmentData),
+      credentials: "include",
+    });
+
+    const json = await response.json();
+
+    if (!response.ok) {
+      console.log(json.error);
+    }
+
+    if (response.ok) {
+      console.log("added");
+    }
+  };
+
+  return (
+    <div className="equipmentform">
+      <form onSubmit={handleSubmit}>
+        <h2>ADD EQUIPMENT</h2>
+        <label>EQUIPMENT TITLE</label>
+        <input
+          type="text"
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
+          required
+        />
+
+        <label>PRICE PER DAY</label>
+        <input
+          type="Number"
+          onChange={(e) => setPrice(e.target.value)}
+          value={price}
+          required
+        />
+
+        <label>UNITS</label>
+        <input
+          type="Number"
+          onChange={(e) => setUnits(e.target.value)}
+          value={units}
+          required
+        />
+
+        <button>ADD EQUIPMENT</button>
+      </form>
+    </div>
+  );
+};
+
+export default AddEquipment;

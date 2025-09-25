@@ -52,7 +52,7 @@ html {
   cursor: pointer;
 }
 
-.LoginPortal form {
+form {
   display: flex;
   flex-direction: column;
   max-width: 400px;
@@ -67,7 +67,7 @@ html {
   background-color: #e4d8d3;
 }
 
-.LoginPortal button {
+form button {
   background-color: #88ab75;
   padding: 10px;
   border-radius: 15px;
@@ -75,14 +75,14 @@ html {
   font-size: large;
   cursor: pointer;
 }
-.LoginPortal button:disabled {
+form button:disabled {
   background-color: #d1f1c0;
   color: #666;
   cursor: initial;
   opacity: 0.6;
 }
 
-.LoginPortal input {
+form input {
   background-color: #ebeaec;
   border: solid black 1px;
 }
@@ -97,6 +97,7 @@ html {
   margin: 0;
   align-self: center;
 }
+
 .Logout {
   display: flex;
   align-items: center;
