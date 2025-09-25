@@ -2,6 +2,7 @@ import { useState } from "react";
 
 const AddEquipment = () => {
   const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
   const [units, setUnits] = useState(0);
 
@@ -14,6 +15,7 @@ const AddEquipment = () => {
 
     const equipmentData = {
       title,
+      description,
       price: price,
       units: unitArray,
     };
@@ -32,6 +34,10 @@ const AddEquipment = () => {
     }
 
     if (response.ok) {
+      setDescription("");
+      setTitle("");
+      setPrice(0);
+      setUnits(0);
       console.log("added");
     }
   };
@@ -47,6 +53,13 @@ const AddEquipment = () => {
           value={title}
           required
         />
+
+        <label>DESCRIPTION</label>
+        <textarea
+          onChange={(e) => setDescription(e.target.value)}
+          value={description}
+          required
+        ></textarea>
 
         <label>PRICE PER DAY</label>
         <input
