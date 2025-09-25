@@ -5,22 +5,16 @@ const AddEquipment = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
-  const [units, setUnits] = useState(0);
 
   const { user } = useAuthContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const unitArray = Array.from({ length: units }, () => ({
-      state: "available",
-    }));
-
     const equipmentData = {
       title,
       description,
       price: price,
-      units: unitArray,
     };
     const response = await fetch("http://localhost:4000/api/equipment/add", {
       method: "POST",
@@ -42,7 +36,6 @@ const AddEquipment = () => {
       setDescription("");
       setTitle("");
       setPrice(0);
-      setUnits(0);
       console.log("added");
     }
   };
@@ -71,14 +64,6 @@ const AddEquipment = () => {
           type="Number"
           onChange={(e) => setPrice(e.target.value)}
           value={price}
-          required
-        />
-
-        <label>UNITS</label>
-        <input
-          type="Number"
-          onChange={(e) => setUnits(e.target.value)}
-          value={units}
           required
         />
 

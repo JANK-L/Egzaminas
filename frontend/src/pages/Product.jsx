@@ -18,6 +18,7 @@ const Product = () => {
           "http://localhost:4000/api/equipment/list/" + id,
           {
             headers: {
+              Authorization: `Bearer ${user?.token}`,
               credentials: "include",
             },
           }
@@ -35,7 +36,7 @@ const Product = () => {
       }
     };
     fetchProduct();
-  }, [id]);
+  }, [id, user]);
 
   const getTotalDays = (startDate, endDate) => {
     if (!startDate || !endDate) return 0;
@@ -47,6 +48,37 @@ const Product = () => {
     return dayDiff + 1;
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const response = await fetch(
+      "http://localhost:4000/api/reservation/add/" + id,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          equipment_id: id,
+          timeFrom: startDate,
+          timeTo: endDate,
+          price: getTotalDays(startDate, endDate) * product.price,
+        }),
+        credentials: "include",
+      }
+    );
+
+    const json = await response.json();
+
+    if (!response.ok) {
+      console.log(json.error);
+    }
+
+    if (response.ok) {
+      console.log("reserved");
+    }
+  };
   return (
     <div className="Product">
       <h3>{product.title}</h3>
@@ -55,10 +87,7 @@ const Product = () => {
         {product.description}
       </p>
       <p>Price: {product.price} &euro;/day</p>
-      <p>
-        Available units:{" "}
-        {product.units?.filter((u) => u.state === "available").length || 0}{" "}
-      </p>
+
       {user ? (
         <>
           <DateSelector
@@ -76,7 +105,7 @@ const Product = () => {
           ) : (
             <></>
           )}
-          <button>Rent</button>
+          <button onClick={handleSubmit}>Rent</button>
         </>
       ) : (
         <Link to="/login">

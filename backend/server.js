@@ -12,15 +12,17 @@ dotenv.config();
 
 const server = express();
 
+const PORT = process.env.PORT;
+
 //Conection to DB
 mongoose
   .connect(process.env.URI)
   .then(() => {
-    server.listen(process.env.PORT, () => {
+    server.listen(PORT, () => {
       console.log("-----");
       console.log("Connected to DB.");
-      console.log(`Listening on port ${process.env.PORT}.`);
-      console.log(`Hosting: http://localhost:${process.env.PORT}`);
+      console.log(`Listening on port ${PORT}.`);
+      console.log(`Hosting: http://localhost:${PORT}`);
       console.log("-----");
     });
   })

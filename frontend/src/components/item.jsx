@@ -10,15 +10,8 @@ const Items = ({ item }) => {
   return (
     <Link to={link + item._id}>
       <div className="item-card">
-        <h3>
-          {item.title} <br />
-          {(link, item._id)}
-        </h3>
+        <h3>{item.title}</h3>
         <p>Price: {item.price} &euro;/day</p>
-        <p>
-          Available units:{" "}
-          {item.units.filter((unit) => unit.state === "available").length}
-        </p>
       </div>
     </Link>
   );

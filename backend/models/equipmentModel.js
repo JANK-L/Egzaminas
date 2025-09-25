@@ -14,15 +14,12 @@ const equipmentSchema = new Schema({
     type: Number,
     required: true,
   },
-  units: [
-    {
-      state: {
-        type: String,
-        enum: ["available", "reserved", "rented"],
-        default: "available",
-      },
-    },
-  ],
+
+  state: {
+    type: String,
+    enum: ["available", "draft", "rented"],
+    default: "draft",
+  },
 });
 
 export default mongoose.model("Equipment", equipmentSchema);
