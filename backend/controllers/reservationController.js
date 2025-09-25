@@ -1,8 +1,8 @@
-import Equipment from "../models/equipmentModel.js";
+import Reservation from "../models/reservationModel.js";
 
 export const getList = async (req, res) => {
   try {
-    const list = await Equipment.find({ "units.state": "available" });
+    const list = await Reservation.find();
     if (list) res.status(200).json({ list });
   } catch (error) {
     console.log(error);
@@ -38,33 +38,6 @@ export const postItem = async (req, res) => {
     res.status(201).json(equipment);
   } catch (error) {
     console.error("Error adding equipment:", error);
-    res.status(500).json({ message: "Server error" });
-  }
-};
-
-export const updateItem = async (req, res) => {
-  const { title, price, units, description, _id } = req.body;
-  try {
-    if (!title || !price || !units || !description) {
-      return res.status(400).json({ message: "Invalid input data" });
-    }
-
-    const equipment = await Equipment.findByIdAndUpdate(
-      _id,
-      {
-        title,
-        price,
-        units,
-        description,
-      },
-      { new: true } // Return the updated document
-    );
-    if (!equipment) {
-      return res.status(404).json({ message: "Equipment not found" });
-    }
-    res.status(201).json(equipment);
-  } catch (error) {
-    console.error("Error updating equipment:", error);
     res.status(500).json({ message: "Server error" });
   }
 };

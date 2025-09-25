@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
 import Items from "../components/item";
+import { useAuthContext } from "../hooks/useAuthContext";
 
-const Home = () => {
+const Reservations = () => {
   const [list, setList] = useState([]);
+  const { user } = useAuthContext();
 
   useEffect(() => {
     const fetchList = async () => {
       try {
         const response = await fetch(
-          "http://localhost:4000/api/equipment/list",
+          "http://localhost:4000/api/reservation/list",
           {
             method: "GET",
             headers: {
+              Authorization: `Bearer ${user.token}`,
               "Content-Type": "application/json",
             },
           }
@@ -20,7 +23,7 @@ const Home = () => {
         const json = await response.json();
 
         if (!response.ok) {
-          throw new Error(json.message || "Failed to fetch equipment list");
+          throw new Error(json.message || "Failed to fetch reservation list");
         }
 
         setList(json.list);
@@ -28,18 +31,20 @@ const Home = () => {
         console.log(err.message);
       }
     };
-    fetchList();
-  }, []);
+    if (user?.token) {
+      fetchList();
+    }
+  }, [user.token]);
 
   return (
     <div>
-      <h2 style={{ textAlign: "center" }}>Equipment</h2>
+      <h2 style={{ textAlign: "center" }}>All reservations</h2>
       <div className="item-list">
         {list.length > 0
           ? list.map((item) => <Items key={item._id} item={item} />)
-          : "No equipment was found."}
+          : "No reservation was found"}
       </div>
     </div>
   );
 };
-export default Home;
+export default Reservations;

@@ -6,6 +6,7 @@ import cors from "cors";
 import userRoutes from "./routes/userRoutes.js";
 
 import equipmentRoutes from "./routes/equipmentRoutes.js";
+import reservationRoutes from "./routes/reservationRoutes.js";
 
 dotenv.config();
 
@@ -38,6 +39,7 @@ server.use((req, res, next) => {
 
 server.use("/api/auth", userRoutes);
 server.use("/api/equipment", equipmentRoutes);
+server.use("/api/reservation", reservationRoutes);
 server.use((req, res) => {
   res.status(404).json({ message: "Not Found" });
 });

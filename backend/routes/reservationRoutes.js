@@ -3,17 +3,17 @@ import {
   getList,
   getOneItem,
   postItem,
-  updateItem,
-} from "../controllers/equipmentController.js";
+} from "../controllers/reservationController.js";
+
 import { isAdmin, verifyToken } from "../middleware/checkRole.js";
 
 const router = express.Router();
 
-router.post("/add", verifyToken, isAdmin, postItem);
-router.put("/update", verifyToken, isAdmin, updateItem);
+router.post("/add/:id", postItem);
+router.post("/update/:id", postItem);
 
 router.get("/list/:id", getOneItem);
 
-router.get("/list", getList);
+router.get("/list", verifyToken, isAdmin, getList);
 
 export default router;
